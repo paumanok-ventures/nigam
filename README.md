@@ -1,6 +1,6 @@
 <p align="center">
   <br/>
-  <img src="https://artium-v2-blogs.s3.ap-south-1.amazonaws.com/wp-content/uploads/2025/06/Sonu-Nigam-His-Musical-Journey-scaled.webp" alt="Sonu Nigam" width="500"/>
+  <img src="docs/images/Sonu-Nigam-His-Musical-Journey-scaled.webp" alt="Sonu Nigam" width="500"/>
   <br/><br/>
   <b>🎤 NIGAM</b>
   <br/>
