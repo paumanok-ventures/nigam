@@ -1,0 +1,5 @@
+.nigam/snapshots/
+.nigam/tasks/
+*.log
+.DS_Store
+node_modules/
