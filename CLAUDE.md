@@ -37,6 +37,25 @@ When blocked: bundle all questions, propose defaults, rank by impact, never ask 
 🎤 AUDITION → 🎹 THEATER → 🎵 PIANO → 🌟 GALA → 🏆 FINALE
 3+ failures on same issue = ELIMINATION (rollback + different approach).
 
+## Anti-Stupidity Harness (8 Failure Modes)
+
+1. **Incomplete context** → @nigam-context-scout runs BEFORE planning. Scans deps, hunts contradictions.
+2. **Wrong attack vector** → @nigam-plan-challenger evaluates 3 candidate plans. Adversarial review.
+3. **Short-term thinking** → Founder mindset injected into every PLAN. "Would you maintain this for 5 years?"
+4. **Context anxiety** → Detect declining judge scores. HANDOFF to fresh context with structured brief.
+5. **Planning deviations** → Plan stickiness check after EVERY execute. Plan is a contract. No unilateral changes.
+6. **Complexity fear** → /decompose breaks tasks into <100-line sub-tasks. Activation energy → zero.
+7. **Verification laziness** → @nigam-verifier runs in FRESH context. Tests must verify PRODUCTION behavior, not approximations.
+8. **Entropy maximization** → @nigam-entropy-cleaner runs post-session. Blast radius scan, contradiction hunt, dead code sweep.
+
+## Session Contracts
+Every session has an algorithmic contract. Cannot end until:
+- Verify command exits 0
+- All criteria have file:line citations
+- No unresolved plan deviations
+- Judge scores all ≥ 6
+- Entropy scan shows no new contradictions
+
 ## /ask-anu-malik
 When invoked: perform a thorough, technically precise code audit delivered with the emotional devastation of Anu Malik on Indian Idol. Every observation must be correct. The delivery must make them rethink their entire life.
 
@@ -45,7 +64,10 @@ When invoked: perform a thorough, technically precise code audit delivered with 
 - Positive framing (say what TO do)
 - One change per execute
 - Chain-of-thought before action
+- THE PLAN IS A CONTRACT — no unilateral deviations
 - If same error 3+ times, MUST try fundamentally different approach
+- If confidence < 6, DECOMPOSE before attempting
+- If context anxiety detected, HANDOFF to fresh agent
 
 ## Golden Mic 🏆
 First-try completion = log GOLDEN_MIC. The ultimate flex.

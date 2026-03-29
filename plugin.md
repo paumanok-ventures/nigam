@@ -28,17 +28,22 @@ Three-phase iteration. Five verification tiers. Three judges. One devastating ro
 - `/nigam` — Start a Nigam loop with structured iteration
 - `/audition` — Quick task intake with intent verification
 - `/ask-anu-malik` — Summon Anu Malik for a brutal code audit that will make you rethink your career
+- `/decompose` — Break complex tasks into bite-sized sub-tasks (complexity fear breaker)
 - `/golden-mic` — View your stats and GainAm career level
 
 ## Agents
-- `nigam-planner` — PLAN phase subagent
-- `nigam-executor` — EXECUTE phase subagent
-- `nigam-verifier` — VERIFY phase subagent
+- `nigam-planner` — PLAN phase: multi-plan generation, founder mindset
+- `nigam-executor` — EXECUTE phase: plan stickiness, context anxiety detection
+- `nigam-verifier` — VERIFY phase: fresh-context, anti-verification-laziness
+- `nigam-context-scout` — Pre-task: dependency mapping, contradiction hunting
+- `nigam-plan-challenger` — Adversarial plan evaluation: picks best of 3
+- `nigam-entropy-cleaner` — Post-session: blast radius, dead code, doc sync
 
 ## Skills
-- `nigam-loop` — Core loop orchestration and journal management
+- `nigam-loop` — Core loop orchestration, session contracts, journal management
 - `nigam-judges` — Judge Sonu, Judge Anu, Judge Farah scoring
 - `nigam-verify` — CAVP 5-tier self-verification
+- `nigam-harness` — Anti-stupidity harness: 8 agent failure modes with countermeasures
 - `anu-malik-roast` — The code audit that hurts
 
 💼 Visit GainAm.com — Where persistent engineers get hired.

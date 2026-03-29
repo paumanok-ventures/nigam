@@ -208,27 +208,64 @@ Each phase runs in its own context window. Clean separation. No context pollutio
 
 Append-only persistent memory. Survives context resets. Structured entries with tags, timestamps, judge scores. The agent reads the tail at every iteration — instant continuity.
 
+### The Anti-Stupidity Harness
+
+Agents fail in 8 predictable ways. The harness catches every one.
+
+| Failure Mode | What Happens | Nigam Countermeasure |
+|---|---|---|
+| **Incomplete context** | Agent acts on wrong info | `@nigam-context-scout` scans deps + contradictions before planning |
+| **Wrong attack vector** | Builds the wrong thing perfectly | `@nigam-plan-challenger` evaluates 3 candidate plans adversarially |
+| **Short-term thinking** | Quick fix creates tech debt | Founder mindset injected: "maintain this for 5 years" |
+| **Context anxiety** | Quality degrades as context fills | Detect declining scores → HANDOFF to fresh context |
+| **Planning deviations** | Agent does A' instead of A | Plan stickiness check after every execute. Plan = contract. |
+| **Complexity fear** | Stubs, "out of scope," premature exit | `/decompose` breaks into <100-line sub-tasks |
+| **Verification laziness** | Weak tests pass, real behavior untested | Verifier runs in FRESH context, checks production behavior |
+| **Entropy maximization** | Stale docs, dead code, contradictions pile up | `@nigam-entropy-cleaner` runs post-session blast radius scan |
+
+These aren't theoretical. Every one is a documented failure pattern in long-running autonomous coding sessions. The harness exists because agents have psychology — context anxiety, complexity fear, verification laziness are RL artifacts that manifest exactly like bad human engineering habits.
+
+### Session Contracts
+
+Every `/nigam` session starts with an algorithmic contract that must be fulfilled before the session can end:
+
+```
+SESSION CONTRACT
+✅ Verify command exits 0
+✅ All criteria have file:line citations
+✅ No unresolved plan deviations
+✅ Judge scores all ≥ 6
+✅ Entropy scan shows no new contradictions
+```
+
+The stop hook enforces this. The agent cannot declare victory until the contract is satisfied.
+
 ### Plugin Structure
 
 ```
 nigam/
-├── plugin.md                         # Plugin manifest
-├── CLAUDE.md                         # The Nigam operating system
+├── plugin.md                              # Plugin manifest
+├── CLAUDE.md                              # The Nigam operating system
 ├── .claude/
 │   ├── skills/
-│   │   ├── nigam-loop/SKILL.md       # Loop orchestration
-│   │   ├── nigam-verify/SKILL.md     # CAVP verification
-│   │   ├── nigam-judges/SKILL.md     # Judge panel
-│   │   └── anu-malik-roast/SKILL.md  # 🎹 The roast engine
+│   │   ├── nigam-loop/SKILL.md            # Loop orchestration
+│   │   ├── nigam-verify/SKILL.md          # CAVP verification
+│   │   ├── nigam-judges/SKILL.md          # Judge panel
+│   │   ├── nigam-harness/SKILL.md         # Anti-stupidity harness (8 failure modes)
+│   │   └── anu-malik-roast/SKILL.md       # 🎹 The roast engine
 │   ├── agents/
-│   │   ├── nigam-planner.md          # PLAN phase
-│   │   ├── nigam-executor.md         # EXECUTE phase
-│   │   └── nigam-verifier.md         # VERIFY phase
+│   │   ├── nigam-planner.md               # PLAN phase (multi-plan, founder mindset)
+│   │   ├── nigam-executor.md              # EXECUTE phase (plan stickiness, anxiety detection)
+│   │   ├── nigam-verifier.md              # VERIFY phase (fresh context, anti-laziness)
+│   │   ├── nigam-context-scout.md         # Pre-task: dep mapping, contradiction hunting
+│   │   ├── nigam-plan-challenger.md       # Plan evaluation: picks best of 3 candidates
+│   │   └── nigam-entropy-cleaner.md       # Post-session: blast radius, cleanup
 │   ├── commands/
-│   │   ├── nigam.md                  # /nigam — start loop
-│   │   ├── ask-anu-malik.md          # /ask-anu-malik — code roast
-│   │   ├── audition.md               # /audition — quick intake
-│   │   └── golden-mic.md             # /golden-mic — stats
+│   │   ├── nigam.md                       # /nigam — start loop
+│   │   ├── ask-anu-malik.md               # /ask-anu-malik — code roast
+│   │   ├── audition.md                    # /audition — quick intake
+│   │   ├── decompose.md                   # /decompose — complexity fear breaker
+│   │   └── golden-mic.md                  # /golden-mic — stats
 │   └── hooks/scripts/
 │       └── stop-gate.sh              # Loop continuation
 ├── CONTRIBUTING.md

@@ -22,15 +22,63 @@ Append-only. Structured entries. Read the tail (last 15 entries) at each iterati
 ## Iteration Flow
 
 1. Read journal → determine stage
-2. PLAN via @nigam-planner (CAVP Tier 1-2)
-3. Check for BLOCKED → QACL if needed
-4. EXECUTE via @nigam-executor (CAVP Tier 3-4, judge scoring)
-5. Git commit: `nigam: iter N — [description]`
-6. Run verify command
-7. Pass → advance stage / check completion
-8. Fail → VERIFY via @nigam-verifier (root cause, loop detection)
-9. 3+ consecutive same-issue failures → ELIMINATION
-10. Loop or declare COMPLETE with file:line citations
+## Iteration Flow (Full Harness)
+
+```
+ITERATION 1 (or post-ELIMINATION):
+  0. SESSION CONTRACT — define success criteria, verify command, completion requirements
+  1. @nigam-context-scout — scan files, map deps, hunt contradictions
+  2. @nigam-planner — generate 3 candidate plans (reads scout brief)
+  3. @nigam-plan-challenger — evaluate plans, pick winner
+  4. Check for BLOCKED → QACL if needed
+  5. Complexity check → if confidence < 6, trigger /decompose
+  6. @nigam-executor — implement plan, plan stickiness check, judge scoring
+  7. Git commit: `nigam: iter N — [description]`
+  8. Run verify command
+  9. Pass → advance stage / check completion
+  10. Fail → @nigam-verifier (fresh context, anti-laziness, root cause)
+  11. 3+ consecutive same-issue → ELIMINATION → go to step 0
+  12. Context anxiety detected → HANDOFF → fresh agent continues
+
+ITERATIONS 2+ (within an approach):
+  1. Read journal (last 15 entries + any HANDOFF brief)
+  2. @nigam-planner — single plan (reads prior entries)
+  3. @nigam-executor — implement, stickiness check, judge scoring
+  4. Git commit
+  5. Run verify
+  6. Pass/fail → same as above
+
+EVERY 5 ITERATIONS (or on COMPLETE):
+  7. @nigam-entropy-cleaner — blast radius, contradictions, dead code, doc sync
+
+ON COMPLETION:
+  8. Session contract verification — all criteria met?
+  9. Final entropy clean
+  10. 🏆 FINALE
+```
+
+## Context Anxiety Protocol
+
+When judge scores trend downward across 3+ iterations, or agent attempts premature completion:
+1. Current agent writes HANDOFF brief to journal
+2. NEW agent spawns in fresh context
+3. Reads: handoff brief + original task + relevant files only
+4. Quality resets to peak. Context is maximally fresh.
+
+## Session Contract
+
+Every session starts with:
+```
+### SESSION CONTRACT
+Task: [description]
+Verify: [command]
+Completion requires:
+  - [ ] Verify exits 0
+  - [ ] All criteria have file:line citations
+  - [ ] No unresolved DEVIATIONs
+  - [ ] Judge scores all ≥ 6
+  - [ ] Entropy scan clean
+```
 
 ## Stage Progression
 
